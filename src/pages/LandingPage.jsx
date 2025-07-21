@@ -65,6 +65,15 @@ const fadeUp = {
 };
 
 const LandingPage = () => {
+  // Responsive check
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <motion.div
       className="flex flex-col w-full overflow-hidden md:h-screen"
@@ -75,13 +84,13 @@ const LandingPage = () => {
     >
       {/* Logo at the top */}
       <motion.div
-        className="flex flex-col items-start mt-2 pl-10"
+        className="flex flex-col items-center mt-8 md:items-start md:pl-10"
         variants={fadeLeft}
       >
         <motion.img
           src="/logos/logo.svg"
           alt="EFE Logo"
-          className="w-28 h-28 cursor-pointer"
+          className="w-24 h-24 md:w-28 md:h-28 cursor-pointer"
           whileHover={{
             scale: 1.15,
           }}
@@ -89,10 +98,10 @@ const LandingPage = () => {
         />
       </motion.div>
       {/* Main content */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-10 gap-8 flex-1 mt-[-40px]">
-        {/* Left: Illustration */}
+      <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 gap-8 flex-1 mt-[-20px] md:mt-[-40px]">
+        {/* Left: Illustration (hidden on mobile) */}
         <motion.div
-          className="flex flex-col items-center md:items-start gap-6 w-1/2 md:w-1/3 lg:w-1/3"
+          className="hidden md:flex flex-col items-center md:items-start gap-6 w-1/2 md:w-1/3 lg:w-1/3"
           variants={staggerContainer}
           style={{ marginTop: '-32px' }}
         >
@@ -109,12 +118,12 @@ const LandingPage = () => {
         </motion.div>
         {/* Right: Content */}
         <motion.div
-          className=" w-1/2 md:w-2/3 lg:w-3/4 flex flex-col items-center md:items-start"
+          className="w-full md:w-1/2 lg:w-2/3 flex flex-col items-center md:items-start"
           variants={staggerContainer}
-          style={{ marginTop: '-32px' }}
+          style={{ marginTop: '0' }}
         >
           <motion.h1
-            className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight text-center md:text-left"
             style={{
               fontFamily: 'var(--font-family-dream)',
               color: 'var(--brand-font)',
@@ -128,7 +137,7 @@ const LandingPage = () => {
             <AnimatedTitle text="DON’T BLINK." />
           </motion.h1>
           <motion.p
-            className="text-lg mb-8"
+            className="text-base sm:text-lg mb-8 text-center md:text-left"
             style={{
               fontFamily: 'var(--font-family-outfit)',
               color: 'var(--brand-font)',
@@ -139,7 +148,7 @@ const LandingPage = () => {
           </motion.p>
           {/* Email Subscription */}
           <motion.form
-            className="flex flex-col sm:flex-row items-center gap-4 mb-8 w-full max-w-md"
+            className="flex flex-col items-center gap-4 mb-4 w-full max-w-md"
             variants={fadeUp}
           >
             <input
@@ -152,9 +161,12 @@ const LandingPage = () => {
                 color: 'var(--brand-font)',
               }}
             />
+          </motion.form>
+          {/* Subscribe button below textbox on mobile */}
+          <motion.div className="w-full max-w-md flex justify-center mb-8" variants={fadeUp}>
             <button
               type="submit"
-              className="px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group"
+              className="px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group w-full"
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 backgroundColor: 'var(--brand-primary)',
@@ -173,9 +185,9 @@ const LandingPage = () => {
                 }}
               ></span>
             </button>
-          </motion.form>
+          </motion.div>
           {/* Social Icons */}
-          <motion.div className="flex gap-4 mt-2" variants={fadeUp}>
+          <motion.div className="flex gap-4 mt-2 justify-center md:justify-start" variants={fadeUp}>
             <a
               href="#"
               className="w-10 h-10 flex items-center justify-center rounded-full border transition relative overflow-hidden group"
