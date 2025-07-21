@@ -148,7 +148,7 @@ const LandingPage = () => {
           </motion.p>
           {/* Email Subscription */}
           <motion.form
-            className="flex flex-col items-center gap-4 mb-4 w-full max-w-md"
+            className="flex flex-col md:flex-row items-center gap-4 mb-4 w-full max-w-md"
             variants={fadeUp}
           >
             <input
@@ -161,12 +161,9 @@ const LandingPage = () => {
                 color: 'var(--brand-font)',
               }}
             />
-          </motion.form>
-          {/* Subscribe button below textbox on mobile */}
-          <motion.div className="w-full max-w-md flex justify-center mb-8" variants={fadeUp}>
             <button
               type="submit"
-              className="px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group w-full"
+              className="px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group w-full md:w-auto"
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 backgroundColor: 'var(--brand-primary)',
@@ -185,7 +182,7 @@ const LandingPage = () => {
                 }}
               ></span>
             </button>
-          </motion.div>
+          </motion.form>
           {/* Social Icons */}
           <motion.div className="flex gap-4 mt-2 justify-center md:justify-start" variants={fadeUp}>
             <a
