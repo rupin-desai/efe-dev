@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Utility to split text into animated letter spans (hover only)
+// Utility to split text into animated letter spans (hover only), preserving spaces naturally
 const AnimatedTitle = ({ text }) => (
-  <span className="inline-block">
-    {text.split('').map((char, idx) =>
-      char === ' ' ? (
-        <span key={idx}>&nbsp;</span>
+  <span className="inline-block whitespace-pre">
+    {Array.from(text).map((char, idx) =>
+      char === '_' ? (
+        // Render invisible span for underscore
+        <span key={idx} className="inline-block" style={{ visibility: 'hidden' }}>_</span>
+      ) : char === ' ' ? (
+        // Render space as normal
+        <span key={idx} className="inline-block">&nbsp;</span>
       ) : (
         <motion.span
           key={idx}
@@ -19,7 +23,10 @@ const AnimatedTitle = ({ text }) => (
             duration: 0.8,
           }}
           className="inline-block cursor-pointer"
-          style={{ display: 'inline-block', willChange: 'transform' }}
+          style={{
+            display: 'inline-block',
+            willChange: 'transform',
+          }}
         >
           {char}
         </motion.span>
@@ -76,7 +83,7 @@ const LandingPage = () => {
 
   return (
     <motion.div
-      className="flex flex-col w-full overflow-hidden md:h-screen"
+      className={`flex flex-col w-full overflow-hidden min-h-screen md:h-screen ${isMobile ? 'justify-center' : ''}`}
       style={{ backgroundColor: 'var(--brand-primary-bg)' }}
       variants={staggerContainer}
       initial="hidden"
@@ -84,7 +91,7 @@ const LandingPage = () => {
     >
       {/* Logo at the top */}
       <motion.div
-        className="flex flex-col items-center mt-8 md:items-start md:pl-10"
+        className={`flex flex-col ${isMobile ? 'items-center mt-8' : 'items-start md:pl-10 mt-8'}`}
         variants={fadeLeft}
       >
         <motion.img
@@ -98,12 +105,11 @@ const LandingPage = () => {
         />
       </motion.div>
       {/* Main content */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-10 gap-8 flex-1 mt-[-20px] md:mt-[-40px]">
+      <div className={`flex flex-col md:flex-row ${isMobile ? 'items-center justify-center flex-1' : 'items-center justify-between'} px-6 md:px-10 gap-8`}>
         {/* Left: Illustration (hidden on mobile) */}
         <motion.div
           className="hidden md:flex flex-col items-center md:items-start gap-6 w-1/2 md:w-1/3 lg:w-1/3"
           variants={staggerContainer}
-          style={{ marginTop: '-32px' }}
         >
           <motion.img
             src="/graphics/landing_illus.png"
@@ -118,12 +124,12 @@ const LandingPage = () => {
         </motion.div>
         {/* Right: Content */}
         <motion.div
-          className="w-full md:w-1/2 lg:w-2/3 flex flex-col items-center md:items-start"
+          className={`w-full md:w-2/3 lg:w-2/3 flex flex-col ${isMobile ? 'items-center justify-center' : 'items-center md:items-start'}`}
           variants={staggerContainer}
           style={{ marginTop: '0' }}
         >
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight text-center md:text-left"
+            className={`text-3xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight ${isMobile ? 'text-center' : 'text-center md:text-left'}`}
             style={{
               fontFamily: 'var(--font-family-dream)',
               color: 'var(--brand-font)',
@@ -132,12 +138,21 @@ const LandingPage = () => {
             }}
             variants={fadeRight}
           >
-            <AnimatedTitle text="THE DROP’S BREWING." />
-            <br />
-            <AnimatedTitle text="DON’T BLINK." />
+            {isMobile ? (
+              <>
+                THE DROP’S BREWING.<br />
+                DON’T BLINK.
+              </>
+            ) : (
+              <>
+                <AnimatedTitle text="THE_DROP’S_BREWING." />
+                <br />
+                <AnimatedTitle text="DON’T_BLINK." />
+              </>
+            )}
           </motion.h1>
           <motion.p
-            className="text-base sm:text-lg mb-8 text-center md:text-left"
+            className={`text-base sm:text-lg mb-8 ${isMobile ? 'text-center' : 'text-center md:text-left'}`}
             style={{
               fontFamily: 'var(--font-family-outfit)',
               color: 'var(--brand-font)',
@@ -148,13 +163,13 @@ const LandingPage = () => {
           </motion.p>
           {/* Email Subscription */}
           <motion.form
-            className="flex flex-col md:flex-row items-center gap-4 mb-4 w-full max-w-md"
+            className={`flex flex-col ${isMobile ? 'items-center w-full' : 'md:flex-row items-center'} gap-4 mb-4 max-w-md`}
             variants={fadeUp}
           >
             <input
               type="email"
               placeholder="Please enter your e-mail adress"
-              className="flex-1 px-4 py-2 rounded-full border outline-none bg-transparent"
+              className={`px-4 py-2 rounded-full border outline-none bg-transparent ${isMobile ? 'w-full' : 'flex-1'}`}
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 borderColor: 'var(--brand-primary)',
@@ -163,7 +178,7 @@ const LandingPage = () => {
             />
             <button
               type="submit"
-              className="px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group w-full md:w-auto"
+              className={`px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group ${isMobile ? 'w-full' : 'md:w-auto'}`}
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 backgroundColor: 'var(--brand-primary)',

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EFE Subscription Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f6f4ed;
+      font-family: 'Outfit', Arial, sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 480px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .logo {
+      width: 64px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Dream', serif;
+      color: #6B7A62;
+      font-size: 2rem;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+    .cta {
+      display: inline-block;
+      background: linear-gradient(90deg, #6B7A62 0%, #A3B18A 100%);
+      color: #fff;
+      padding: 12px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 12px;
+    }
+    .footer {
+      margin-top: 32px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://efe.com/logos/logo.svg" alt="EFE Logo" class="logo" />
+    <h1>Welcome, {{user_name}}!</h1>
+    <p>
+      Thank you for subscribing with <b>{{user_email}}</b>.<br>
+      You’re now on the list for the comfiest, cleanest essentials.<br>
+      Stay tuned for exclusive drops and updates!
+    </p>
+    <a href="https://efe.com" class="cta">Visit Our Store</a>
+    <div class="footer">
+      &copy; 2025 EFE. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
