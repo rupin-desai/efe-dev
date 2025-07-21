@@ -1,7 +1,7 @@
 /* Tailwind import */
 @import "tailwindcss";
 
-/* Font definitions */
+/* Dream Avenue Variable Font */
 @font-face {
   font-family: 'Dream Avenue';
   src: url('/fonts/Dream_Avenue.ttf') format('truetype');
@@ -10,10 +10,36 @@
   font-display: swap;
 }
 
+/* Outfit Variable Font */
 @font-face {
   font-family: 'Outfit';
   src: url('/fonts/Outfit-Variable.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+}
+
+:root {
+  --font-family-dream: 'Dream Avenue', sans-serif;
+  --font-family-outfit: 'Outfit', sans-serif;
+}
+
+/* Apply Outfit as the default font */
+html, body {
+  font-family: var(--font-family-outfit);
+}
+
+/* Theme Variables updated to match landing page */
+@layer base {
+  :root {
+    --brand-primary: #1e5631;           /* Deep green for text and buttons */
+    --brand-primary-light: #43ea7c;     /* Accent green */
+    --brand-primary-bg: #f8f6ea;        /* Soft cream background */
+    --neutral-white: #ffffff;
+    --neutral-black: #000000;
+    --neutral-gray-50: #f8fafc;
+    --neutral-gray-100: #f1f5f9;
+    --neutral-gray-500: #64748b;
+    --neutral-gray-900: #0f172a;
+  }
 }
