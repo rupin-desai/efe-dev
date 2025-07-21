@@ -2,6 +2,29 @@ import React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+// Utility to split text into animated letter spans
+const AnimatedTitle = ({ text }) => {
+  return (
+    <span className="inline-block">
+      {text.split('').map((char, idx) =>
+        char === ' ' ? (
+          <span key={idx}>&nbsp;</span>
+        ) : (
+          <motion.span
+            key={idx}
+            whileHover={{ scale: 1.3, color: 'var(--brand-primary-light)' }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            className="inline-block cursor-pointer"
+            style={{ display: 'inline-block', willChange: 'transform' }}
+          >
+            {char}
+          </motion.span>
+        )
+      )}
+    </span>
+  );
+};
+
 const staggerContainer = {
   hidden: {},
   show: {
@@ -84,10 +107,14 @@ const LandingPage = () => {
             style={{
               fontFamily: 'var(--font-family-dream)',
               color: 'var(--brand-font)',
+              cursor: 'pointer',
+              userSelect: 'none',
             }}
             variants={fadeRight}
           >
-            THE DROP’S BREWING.<br />DON’T BLINK.
+            <AnimatedTitle text="THE DROP’S BREWING." />
+            <br />
+            <AnimatedTitle text="DON’T BLINK." />
           </motion.h1>
           <motion.p
             className="text-lg mb-8"
@@ -159,6 +186,11 @@ const LandingPage = () => {
                   opacity: 0.9,
                 }}
               ></span>
+              <style>{`
+                .group:hover {
+                  border-color: transparent !important;
+                }
+              `}</style>
             </a>
             <a
               href="#"
@@ -181,6 +213,11 @@ const LandingPage = () => {
                   opacity: 0.9,
                 }}
               ></span>
+              <style>{`
+                .group:hover {
+                  border-color: transparent !important;
+                }
+              `}</style>
             </a>
           </motion.div>
         </motion.div>
