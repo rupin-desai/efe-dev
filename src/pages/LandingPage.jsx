@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-// Utility to split text into animated letter spans
-const AnimatedTitle = ({ text }) => {
-  return (
-    <span className="inline-block">
-      {text.split('').map((char, idx) =>
-        char === ' ' ? (
-          <span key={idx}>&nbsp;</span>
-        ) : (
-          <motion.span
-            key={idx}
-            whileHover={{ scale: 1.3, color: 'var(--brand-primary-light)' }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-            className="inline-block cursor-pointer"
-            style={{ display: 'inline-block', willChange: 'transform' }}
-          >
-            {char}
-          </motion.span>
-        )
-      )}
-    </span>
-  );
-};
+// Utility to split text into animated letter spans (hover only)
+const AnimatedTitle = ({ text }) => (
+  <span className="inline-block">
+    {text.split('').map((char, idx) =>
+      char === ' ' ? (
+        <span key={idx}>&nbsp;</span>
+      ) : (
+        <motion.span
+          key={idx}
+          whileHover={{ scale: 1.3, color: 'var(--brand-primary-light)' }}
+          transition={{
+            type: 'spring',
+            stiffness: 120,
+            damping: 16,
+            duration: 0.8,
+          }}
+          className="inline-block cursor-pointer"
+          style={{ display: 'inline-block', willChange: 'transform' }}
+        >
+          {char}
+        </motion.span>
+      )
+    )}
+  </span>
+);
 
 const staggerContainer = {
   hidden: {},
@@ -64,8 +67,8 @@ const fadeUp = {
 const LandingPage = () => {
   return (
     <motion.div
-      className="flex flex-col w-full overflow-hidden"
-      style={{ backgroundColor: 'var(--brand-primary-bg)', height: '100vh' }}
+      className="flex flex-col w-full overflow-hidden md:h-screen"
+      style={{ backgroundColor: 'var(--brand-primary-bg)' }}
       variants={staggerContainer}
       initial="hidden"
       animate="show"
@@ -75,35 +78,43 @@ const LandingPage = () => {
         className="flex flex-col items-start mt-2 pl-10"
         variants={fadeLeft}
       >
-        <img
+        <motion.img
           src="/logos/logo.svg"
           alt="EFE Logo"
-          className="w-28 h-28"
+          className="w-28 h-28 cursor-pointer"
+          whileHover={{
+            scale: 1.15,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         />
       </motion.div>
       {/* Main content */}
       <div className="flex flex-col md:flex-row items-center justify-between px-10 gap-8 flex-1 mt-[-40px]">
         {/* Left: Illustration */}
         <motion.div
-          className="flex flex-col items-center md:items-start gap-6 md:w-1/3"
+          className="flex flex-col items-center md:items-start gap-6 w-1/2 md:w-1/3 lg:w-1/3"
           variants={staggerContainer}
           style={{ marginTop: '-32px' }}
         >
           <motion.img
             src="/graphics/landing_illus.png"
             alt="Eco-friendly shopping"
-            className="w-[450px] h-auto -mt-12"
+            className="w-[450px] h-auto -mt-12 cursor-pointer"
             variants={fadeLeft}
+            whileHover={{
+              scale: 1.07,
+            }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           />
         </motion.div>
         {/* Right: Content */}
         <motion.div
-          className="md:w-3/4 flex flex-col items-center md:items-start"
+          className=" w-1/2 md:w-2/3 lg:w-3/4 flex flex-col items-center md:items-start"
           variants={staggerContainer}
           style={{ marginTop: '-32px' }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-normal mb-6 leading-tight"
+            className="text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight"
             style={{
               fontFamily: 'var(--font-family-dream)',
               color: 'var(--brand-font)',
