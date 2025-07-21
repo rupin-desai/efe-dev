@@ -1,1 +1,19 @@
+/* Tailwind import */
 @import "tailwindcss";
+
+/* Font definitions */
+@font-face {
+  font-family: 'Dream Avenue';
+  src: url('/fonts/Dream_Avenue.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('/fonts/Outfit-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
