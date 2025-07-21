@@ -34,7 +34,8 @@ html, body {
   :root {
     --brand-primary: #1e5631;           /* Deep green for text and buttons */
     --brand-primary-light: #43ea7c;     /* Accent green */
-    --brand-primary-bg: #f8f6ea;        /* Soft cream background */
+    --brand-primary-bg: #EDE9DE;        /* Updated soft cream background */
+    --brand-font: #2A3836;              /* Updated font color */
     --neutral-white: #ffffff;
     --neutral-black: #000000;
     --neutral-gray-50: #f8fafc;
