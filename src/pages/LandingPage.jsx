@@ -158,9 +158,7 @@ const LandingPage = () => {
 
   return (
     <motion.div
-      className={`flex flex-col w-full overflow-hidden min-h-screen md:h-screen ${
-        isMobile ? "justify-center" : ""
-      }`}
+      className={`flex flex-col w-full overflow-hidden min-h-screen md:h-screen justify-center`} // <-- Added justify-center
       style={{ backgroundColor: "var(--brand-primary-bg)" }}
       variants={staggerContainer}
       initial="hidden"
@@ -190,8 +188,8 @@ const LandingPage = () => {
         className={`flex flex-col md:flex-row ${
           isMobile
             ? "items-center justify-center flex-1"
-            : "items-center justify-between"
-        } px-6 md:px-10 gap-8`}
+            : "items-center justify-between flex-1" // <-- Added flex-1 for desktop too
+        } px-6 md:px-10 gap-8 -mt-10`}
       >
         {/* Left: Illustration (hidden on mobile) */}
         <motion.div
@@ -328,11 +326,14 @@ const LandingPage = () => {
             variants={fadeUp}
           >
             <a
-              href="#"
+              href="https://www.facebook.com/share/15uncxwHaZ/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full border transition relative overflow-hidden group"
               style={{
                 borderColor: "var(--brand-primary)",
                 color: "var(--brand-primary)",
+                textDecoration: "none",
               }}
               aria-label="Facebook"
             >
@@ -356,11 +357,14 @@ const LandingPage = () => {
               `}</style>
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/efeindia.in"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center rounded-full border transition relative overflow-hidden group"
               style={{
                 borderColor: "var(--brand-primary)",
                 color: "var(--brand-primary)",
+                textDecoration: "none",
               }}
               aria-label="Instagram"
             >
