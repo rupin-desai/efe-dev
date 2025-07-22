@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <title>EFE Subscription Confirmation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Poppins font from Google Fonts CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       background: #f6f4ed;
-      font-family: 'Outfit', Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       color: #222;
       margin: 0;
       padding: 0;
@@ -26,11 +28,11 @@
       margin-bottom: 24px;
     }
     h1 {
-      font-family: 'Dream', serif;
+      font-family: 'Poppins', Arial, sans-serif;
       color: #6B7A62;
       font-size: 2rem;
       margin-bottom: 16px;
-      font-weight: 400;
+      font-weight: 600;
     }
     p {
       font-size: 1.1rem;
@@ -46,18 +48,23 @@
       font-weight: 600;
       font-size: 1rem;
       margin-top: 12px;
+      font-family: 'Poppins', Arial, sans-serif;
     }
     .footer {
       margin-top: 32px;
       font-size: 0.9rem;
       color: #888;
     }
+    a {
+      text-decoration: none !important;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://efe.com/logos/logo.svg" alt="EFE Logo" class="logo" />
-    <h1>Welcome, {{user_name}}!</h1>
+    <h1>Welcome!</h1>
     <p>
       Thank you for subscribing with <b>{{user_email}}</b>.<br>
       You’re now on the list for the comfiest, cleanest essentials.<br>
