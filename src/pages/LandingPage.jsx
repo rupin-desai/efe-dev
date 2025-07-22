@@ -218,7 +218,7 @@ const LandingPage = () => {
           style={{ marginTop: "0" }}
         >
           <motion.h1
-            className={`text-3xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight ${
+            className={`text-4xl sm:text-4xl md:text-4xl lg:text-6xl xl:text-7xl font-normal mb-6 leading-tight ${
               isMobile ? "text-center" : "text-center md:text-left"
             }`}
             style={{
