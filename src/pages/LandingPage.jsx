@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { sendEmail } from '../util/emailUtils';
 
 // Utility to split text into animated letter spans (hover only), preserving spaces naturally
 const AnimatedTitle = ({ text }) => (
@@ -71,6 +72,10 @@ const fadeUp = {
   },
 };
 
+// Email validation utility
+const validateEmail = (email) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 const LandingPage = () => {
   // Responsive check
   const [isMobile, setIsMobile] = useState(false);
@@ -80,6 +85,41 @@ const LandingPage = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Email state
+  const [email, setEmail] = useState('');
+  const [sending, setSending] = useState(false);
+  const [success, setSuccess] = useState(null);
+
+  const isValid = validateEmail(email);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!isValid || sending) return;
+    setSending(true);
+    setSuccess(null);
+
+    // Replace with your actual EmailJS values
+    const serviceId = 'your_service_id';
+    const templateId = 'your_template_id';
+    const userId = 'your_user_id';
+
+    const templateParams = {
+      user_email: email,
+      user_name: email.split('@')[0], // Example: use part before @ as name
+    };
+
+    const result = await sendEmail({
+      serviceId,
+      templateId,
+      userId,
+      templateParams,
+    });
+
+    setSending(false);
+    setSuccess(result.success ? 'Subscribed!' : 'Error. Try again.');
+    if (result.success) setEmail('');
+  };
 
   return (
     <motion.div
@@ -165,28 +205,37 @@ const LandingPage = () => {
           <motion.form
             className={`flex flex-col ${isMobile ? 'items-center w-full' : 'md:flex-row items-center'} gap-4 mb-4 max-w-md`}
             variants={fadeUp}
+            onSubmit={handleSubmit}
           >
             <input
               type="email"
               placeholder="Please enter your e-mail adress"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={`px-4 py-2 rounded-full border outline-none bg-transparent ${isMobile ? 'w-full' : 'flex-1'}`}
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 borderColor: 'var(--brand-primary)',
                 color: 'var(--brand-font)',
               }}
+              disabled={sending}
             />
-            <button
+            <motion.button
               type="submit"
-              className={`px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group ${isMobile ? 'w-full' : 'md:w-auto'}`}
+              className={`px-6 py-2 cursor-pointer rounded-full font-semibold relative overflow-hidden group ${isMobile ? 'w-full' : 'md:w-auto'} transition-all duration-200`}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 18 }}
               style={{
                 fontFamily: 'var(--font-family-outfit)',
                 backgroundColor: 'var(--brand-primary)',
                 color: 'var(--neutral-white)',
                 border: 'none',
+                opacity: !isValid || sending ? 0.5 : 1,
+                pointerEvents: !isValid || sending ? 'none' : 'auto',
               }}
+              disabled={!isValid || sending}
             >
-              <span className="relative z-10">Subscribe</span>
+              <span className="relative z-10">{sending ? 'Sending...' : 'Subscribe'}</span>
               <span
                 className="absolute left-0 top-0 h-full w-0 group-hover:w-full transition-all duration-500"
                 style={{
@@ -196,8 +245,13 @@ const LandingPage = () => {
                   opacity: 0.7,
                 }}
               ></span>
-            </button>
+            </motion.button>
           </motion.form>
+          {success && (
+            <div className={`mb-4 text-sm ${success === 'Subscribed!' ? 'text-green-700' : 'text-red-600'}`}>
+              {success}
+            </div>
+          )}
           {/* Social Icons */}
           <motion.div className="flex gap-4 mt-2 justify-center md:justify-start" variants={fadeUp}>
             <a
