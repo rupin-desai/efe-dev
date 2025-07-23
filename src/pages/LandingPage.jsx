@@ -174,9 +174,9 @@ const LandingPage = () => {
         variants={fadeLeft}
       >
         <motion.img
-          src="/logos/logo.svg"
+          src="/logos/Efelogo1.png"
           alt="EFE Logo"
-          className="w-32 h-32 md:w-36 md:h-36 cursor-pointer"
+          className="w-36 h-auto md:w-42  cursor-pointer"
           whileHover={{
             scale: 1.15,
           }}

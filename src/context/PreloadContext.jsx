@@ -11,7 +11,7 @@ export const PreloadProvider = ({ children }) => {
   useEffect(() => {
     // Preload logo, illustration, and fonts
     const logo = new Image();
-    logo.src = "/logos/logo.svg";
+    logo.src = "/logos/Efelogo1.png";
     const illus = new Image();
     illus.src = "/graphics/landing_illus.png";
 
