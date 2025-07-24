@@ -266,7 +266,7 @@ const LandingPage = () => {
           >
             <input
               type="email"
-              placeholder="Please enter your e-mail adress"
+              placeholder="Please enter your e-mail address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={`px-4 py-2 rounded-full border outline-none bg-transparent ${
